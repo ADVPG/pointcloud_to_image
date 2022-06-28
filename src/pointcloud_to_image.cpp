@@ -97,8 +97,8 @@ void proyect_pointcloud(const pcl::PointCloud<pcl::PointXYZ>::Ptr pointCloud){
     cv::line(image, axis_c, axis_z, CV_RGB(  0,  0,255), 3);
     
     // Publish image
-
-    sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
+    cvtColor(image,image,cv::COLOR_BGR2RGB);
+    sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "rgb8", image).toImageMsg();
     pub.publish(msg);
 
     //ROS_INFO("Pointcloud image published");
